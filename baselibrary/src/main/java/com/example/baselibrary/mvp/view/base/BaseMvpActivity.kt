@@ -2,6 +2,8 @@ package com.example.baselibrary.mvp.view.base
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.baselibrary.mvp.Constant
 import com.example.baselibrary.mvp.presenter.BasePresenter
@@ -11,12 +13,14 @@ import java.lang.reflect.ParameterizedType
 
 
 /**基础Activity*/
-public abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Presenter>>> : AppCompatActivity(),BaseView<Presenter> {
-    protected var mContext: Context? = null;
+ abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Presenter>>> : AppCompatActivity(),BaseView<Presenter> {
+
     final override val mPresenter: Presenter
     init {
         mPresenter = findPresenterClass().newInstance()
         mPresenter.mView = this
+
+
     }
 
 
@@ -26,7 +30,6 @@ public abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Pre
             setContentView(getContentView())
         }
         preInit(savedInstanceState);
-        mContext = this;
         init();
     }
 
@@ -44,7 +47,11 @@ public abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Pre
     }
 
     override fun showToast(msg: String) {
-        TODO("Not yet implemented")
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getContext(): Context {
+        return this;
     }
 
     override fun showLoading(color: Int, tip: String) {
@@ -59,6 +66,8 @@ public abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Pre
         TODO("Not yet implemented")
     }
 
+
+
     /*****************************分割线**************************************/
     /**
      * 在init方法之前 用于getContentView == -1的情况
@@ -70,7 +79,7 @@ public abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Pre
 
     /*****************************分割线**************************************/
     /**返回资源布局id*/
-   protected abstract fun getContentView():Int
+   protected abstract fun getContentView():Int @LayoutRes
     protected abstract fun init();
 
 }
