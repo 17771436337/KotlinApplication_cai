@@ -4,16 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-              android:orientation="vertical"
+   android:orientation="vertical"
     >
 
-    <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
+    <com.example.baselibrary.widget.CustomToolBar
+            android:id="@+id/title_view"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/colorPrimary"
+            app:leftShow="false"
+            app:leftShowView="image"
+            app:leftImage="@drawable/icon_back"
+            app:titleText="博客列表"
+            app:titleTextSize="20sp"
+            app:titleTextColor="@color/colorPrimaryDark"
+            app:rightShow="true"
+            app:rightShowView="text"
+            app:rightText="添加"
+            app:rightTextColor="@color/colorPrimaryDark"
+            app:rightTextSize="16sp"
     />
-
     <com.example.myapplication.utils.widget.VerifyCodeView
             android:id="@+id/test"
             android:layout_width="wrap_content"
