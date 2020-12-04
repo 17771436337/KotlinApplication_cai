@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import android.os.Build
-import com.example.baselibrary.okhttp.OkHttp
+import com.example.baselibrary.http.okhttp.OkHttp
 
 object NetworkUtil{
     var connectivityManager: ConnectivityManager? = null

@@ -14,6 +14,4 @@ interface IView <out Presenter : IPresenter<IView<Presenter>>>{
     fun showLoading(color: Int = Color.BLUE, tip: String = " 正在加载中 ... ")
 
     fun hideLoading()
-
-    fun onError(throwable: Throwable)
 }

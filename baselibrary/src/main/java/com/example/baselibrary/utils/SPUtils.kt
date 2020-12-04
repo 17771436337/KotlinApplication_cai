@@ -7,7 +7,7 @@ import java.util.*
 
 class SPUtils {
 
-    constructor(context: Context, spName: String, mode: Int) {
+   private constructor(context: Context, spName: String, mode: Int) {
         sp = context.getSharedPreferences(spName, mode)
     }
 

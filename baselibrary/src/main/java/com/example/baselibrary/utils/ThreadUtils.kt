@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicLong
 import kotlin.collections.HashMap
 
 
-class ThreadUtils {
+class ThreadUtils private constructor(){
     /**静态语法块*/
     companion object {
 

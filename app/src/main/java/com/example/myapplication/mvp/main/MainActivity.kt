@@ -13,21 +13,25 @@ import com.example.baselibrary.widget.CustomToolBar
 import com.example.baselibrary.widget.CustomToolBar.OnLeftClickListener
 import com.example.myapplication.DataBaseBean
 import com.example.myapplication.R
+import com.example.myapplication.http.HttpApi
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
 import com.example.baselibrary.adapter.MultiAdapter as MultiAdapter
 
 
-class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
+class MainActivity : BaseMvpActivity<MainPresenter,DataBaseBean>() , MainView {
 
     private var testTask :TestTask = TestTask()
 
     public override fun getContentView(): Int { return R.layout.activity_main }
 
-    override fun onMainSuccess(s: String) {
-        showToast("测试")
 
+    override fun onSuccess(url: String, data: DataBaseBean?) {
+        showToast("测试:"+url)
     }
+
+
+
 
     override fun init() {
 
@@ -36,8 +40,8 @@ class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
         var adapter = Test<DataBaseBean>(this,layoutIds)
         title_view.setOnRightClickListener {
          //  v ->  showToast("开发中" + (v as TextView) .text)
-            testTask.execute()
-
+//            testTask.execute()
+            HttpApi.sendCmdList();
         }
 
         test?.setOnClickListener {
@@ -81,4 +85,8 @@ class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
         }
 
     }
+
+
+
+
 }

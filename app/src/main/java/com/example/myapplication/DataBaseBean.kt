@@ -1,7 +1,3 @@
 package com.example.myapplication
 
-class DataBaseBean {
-
-
-
-}
+class DataBaseBean {}

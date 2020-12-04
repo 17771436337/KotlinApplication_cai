@@ -1,10 +1,13 @@
 package com.example.baselibrary.mvp.view.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import com.example.baselibrary.http.HttpHandler
+import com.example.baselibrary.http.HttpView
 import com.example.baselibrary.mvp.Constant
 import com.example.baselibrary.mvp.presenter.BasePresenter
 import com.example.baselibrary.mvp.view.BaseView
@@ -13,14 +16,16 @@ import java.lang.reflect.ParameterizedType
 
 
 /**基础Activity*/
- abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Presenter>>> : AppCompatActivity(),BaseView<Presenter> {
+ abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Presenter>>,Model> : AppCompatActivity(),BaseView<Presenter>,HttpView<Model> {
 
     final override val mPresenter: Presenter
+
+    /**消息接收机制*/
+    private var httpHandler:HttpHandler<Model>?= HttpHandler<Model>(this)
+
     init {
         mPresenter = findPresenterClass().newInstance()
         mPresenter.mView = this
-
-
     }
 
 
@@ -30,7 +35,13 @@ import java.lang.reflect.ParameterizedType
             setContentView(getContentView())
         }
         preInit(savedInstanceState);
+        httpHandler?.registered();
         init();
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        httpHandler?.unRegistered();
     }
 
     private fun findPresenterClass(): Class<Presenter> {
@@ -62,7 +73,7 @@ import java.lang.reflect.ParameterizedType
         TODO("Not yet implemented")
     }
 
-    override fun onError(throwable: Throwable) {
+    override fun onError(url: String, e: Exception?) {
         TODO("Not yet implemented")
     }
 
@@ -76,10 +87,10 @@ import java.lang.reflect.ParameterizedType
     fun preInit(savedInstanceState: Bundle?){
 
     }
-
     /*****************************分割线**************************************/
     /**返回资源布局id*/
-   protected abstract fun getContentView():Int @LayoutRes
+   protected abstract fun getContentView():Int @SuppressLint("SupportAnnotationUsage")
+    @LayoutRes
     protected abstract fun init();
 
 }
