@@ -14,7 +14,7 @@ class HttpSetting {
     fun init(){
 //Okhttp对象
 
-       OkHttp.okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
+      // OkHttp.okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
 
 
     }
