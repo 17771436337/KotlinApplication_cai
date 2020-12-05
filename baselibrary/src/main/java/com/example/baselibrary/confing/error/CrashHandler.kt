@@ -1,11 +1,18 @@
-package com.example.baselibrary.confing
+package com.example.baselibrary.confing.error
 
 import android.app.Application
 import android.os.Process
 
+/**错误监听*/
 class CrashHandler private constructor() : Thread.UncaughtExceptionHandler  {
 
-    val TAG = CrashHandler::class.java.simpleName
+    private val TAG = CrashHandler::class.java.simpleName
+
+    companion object{
+        val instance: CrashHandler by lazy{
+            CrashHandler()
+        }
+    }
 
     // 系统默认的UncaughtException处理类
     private var mDefaultHandler: Thread.UncaughtExceptionHandler? = null
@@ -14,22 +21,7 @@ class CrashHandler private constructor() : Thread.UncaughtExceptionHandler  {
     private var responseErrorListener: CrashErrorListener? = null
 
 
-    companion object{
-//        private var instance: CrashHandler? = null
-//
-//        /** 获取CrashHandler实例 ,单例模式  */
-//        fun getInstance(): CrashHandler? {
-//            if (CrashHandler.instance == null) CrashHandler.instance = CrashHandler()
-//            return CrashHandler.instance
-//        }
 
-        val instance: CrashHandler by lazy{
-            CrashHandler()
-        }
-
-
-
-    }
 
 
     /**

@@ -1,4 +1,4 @@
-package com.example.baselibrary.confing
+package com.example.baselibrary.confing.error
 
 import android.content.Context
 

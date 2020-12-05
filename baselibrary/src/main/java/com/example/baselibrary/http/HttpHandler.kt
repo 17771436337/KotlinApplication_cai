@@ -1,5 +1,7 @@
 package com.example.baselibrary.http
 
+import com.example.baselibrary.http.model.BaseModel
+import com.example.baselibrary.http.model.HttpHandlerData
 import com.example.baselibrary.mvp.Constant
 import com.example.baselibrary.utils.HandlerUtils
 
@@ -19,7 +21,6 @@ class HttpHandler <Model>(httpView : HttpView<Model>?) : HandlerUtils.UiMessageC
     }
 
     override fun handleMessage(localMessage: HandlerUtils.UiMessage?) {
-
         when (localMessage?.id) {
             Constant.SEND_HTTP_HANDLER_MODE_TYPR -> {
                 var msg: HttpHandlerData<Model> = localMessage.obj as HttpHandlerData<Model>
@@ -28,7 +29,7 @@ class HttpHandler <Model>(httpView : HttpView<Model>?) : HandlerUtils.UiMessageC
                         httpView?.onSuccess(msg.url,msg.data.date)
                     }
                     HttpType.ERROR ->{
-                        var error: BaseData<Exception> = msg.data as BaseData<Exception>
+                        var error: BaseModel<Exception> = msg.data as BaseModel<Exception>
                         httpView?.onError(msg.url,error.date)
                     }
                 }

@@ -1,6 +1,6 @@
 package com.example.baselibrary.http.okhttp.request
 
-import com.example.baselibrary.http.okhttp.DownloadBean
+import com.example.baselibrary.http.model.DownloadBean
 import com.example.baselibrary.http.okhttp.OkHttp
 import com.example.baselibrary.http.okhttp.body.ProgressRequestBody
 import com.example.baselibrary.http.okhttp.body.ProgressResponseBody
@@ -152,7 +152,7 @@ class BaseRequest(url: String, private val type: String) {
 
 
     fun  params( params: Map<String, String>?)= apply{
-        val forEach = params?.forEach {
+        params?.forEach {
             paramsMap[it.key] = it.value
         }
     }
@@ -254,15 +254,9 @@ class BaseRequest(url: String, private val type: String) {
                 client = downloadBuilder.build()
                 val file = File(filePath, fileName)
                 val downloadLength = if (file.exists()) file.length() else 0
-                val downloadResponse =
-                    client.newCall(requestBuilder.url(requestUrl).build()).execute()
+                val downloadResponse = client.newCall(requestBuilder.url(requestUrl).build()).execute()
                 val contentLength = downloadResponse.headersContentLength()
-                val downloadBean= DownloadBean()
-                downloadBean.url=requestUrl
-                downloadBean.contentLength=contentLength
-                downloadBean.downloadLength=downloadLength
-                downloadBean.filePath=filePath
-                downloadBean.filename=fileName
+                val downloadBean = DownloadBean(requestUrl,fileName,filePath,contentLength,downloadLength)
                 callBack.urlToBeanMap[requestUrl]=downloadBean
                 if (contentLength>0){
                     requestBuilder.addHeader("RANGE", "bytes=$downloadLength-$contentLength")

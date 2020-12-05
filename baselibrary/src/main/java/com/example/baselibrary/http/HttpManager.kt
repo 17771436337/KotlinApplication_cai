@@ -1,9 +1,10 @@
 package com.example.baselibrary.http
+import com.example.baselibrary.http.model.BaseModel
+import com.example.baselibrary.http.model.HttpHandlerData
 import com.example.baselibrary.http.okhttp.OkHttp
 import com.example.baselibrary.http.okhttp.callback.GsonCallBack
 import com.example.baselibrary.mvp.Constant
 import com.example.baselibrary.utils.HandlerUtils
-import com.example.baselibrary.utils.LogUtils
 import okhttp3.Call
 import okhttp3.Response
 
@@ -13,7 +14,6 @@ class HttpManager private constructor(){
             HttpManager()
         }
     }
-
     /**
      * 发送给指令的方法集
      */
@@ -39,19 +39,19 @@ class HttpManager private constructor(){
         OkHttp.get(url)
                 .params(params)
                 .addHeader(headers)
-                .execute(object : GsonCallBack<BaseData<T>>() {
+                .execute(object : GsonCallBack<BaseModel<T>>() {
                     override fun getData(
-                        data: BaseData<T>,
-                        rawBodyString: String,
-                        call: Call,
-                        response: Response
+                            data: BaseModel<T>,
+                            rawBodyString: String,
+                            call: Call,
+                            response: Response
                     ) {
                         /**通过回收消息，进行接口处理*/
-                       val msg :HttpHandlerData<T> = HttpHandlerData(url,HttpType.OK,data)
+                       val msg : HttpHandlerData<T> = HttpHandlerData(url,HttpType.OK,data)
                         HandlerUtils.getInstance().send(Constant.SEND_HTTP_HANDLER_MODE_TYPR,msg);
                     }
                     override fun failure(call: Call, e: Exception) {
-                        val msg :HttpHandlerData<Exception> = HttpHandlerData(url,HttpType.ERROR,BaseData<Exception>(-1,"错误日志",e))
+                        val msg :HttpHandlerData<Exception> = HttpHandlerData(url,HttpType.ERROR, BaseModel<Exception>(-1,"错误日志",e))
                         HandlerUtils.getInstance().send(Constant.SEND_HTTP_HANDLER_MODE_TYPR,msg)
                     }
 

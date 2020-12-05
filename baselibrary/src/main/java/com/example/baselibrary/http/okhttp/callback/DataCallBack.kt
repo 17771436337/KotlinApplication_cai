@@ -58,9 +58,7 @@ abstract class DataCallBack <E>() : ResultCallBack() {
         }
     }
 
-    override fun uploadProgressOnMainThread(fileName: String, total: Long, current: Long) {
-
-    }
+    override fun uploadProgressOnMainThread(fileName: String, total: Long, current: Long) {}
 
     override fun responseBodyGetNull(call: Call, response: Response) {}
 

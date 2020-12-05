@@ -40,15 +40,9 @@ abstract class BitmapResultCallBack : ResultCallBack() {
         failure(call,e)
     }
 
-    override fun responseBodyGetNull(call: Call, response: Response) {
-
-    }
-
-
+    override fun responseBodyGetNull(call: Call, response: Response) {}
 
     abstract fun finish(bitmap: Bitmap)
-
-
 
     override fun downloadProgress(url:String,total: Long, current: Long) {
         OkHttp.mainHandler.post {
@@ -56,9 +50,7 @@ abstract class BitmapResultCallBack : ResultCallBack() {
         }
     }
 
-    override fun uploadProgress(fileName: String, total: Long, current: Long) {
-
-    }
+    override fun uploadProgress(fileName: String, total: Long, current: Long) {}
 
     override fun uploadProgressOnMainThread(fileName: String, total: Long, current: Long) {
 

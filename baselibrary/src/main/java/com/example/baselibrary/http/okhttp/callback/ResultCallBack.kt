@@ -1,7 +1,7 @@
 package com.example.baselibrary.http.okhttp.callback
 
+import com.example.baselibrary.http.model.DownloadBean
 import com.example.baselibrary.http.okhttp.listener.BaseProgressListener
-import com.example.baselibrary.http.okhttp.DownloadBean
 import okhttp3.Call
 import okhttp3.Response
 /**参数回调*/

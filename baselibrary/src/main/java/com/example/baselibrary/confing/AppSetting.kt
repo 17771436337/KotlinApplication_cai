@@ -1,13 +1,15 @@
 package com.example.baselibrary.confing
 
 import android.app.Application
+import com.example.baselibrary.confing.error.CrashErrorListener
+import com.example.baselibrary.http.HttpSetting
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
 class AppSetting(builder: Builder?){
     private val responseErrorListener: ResponseErrorListener? = builder?.responseErrorListener
     private val crashErrorResponse: CrashErrorListener? = builder?.crashErrorResponse
     private val application: Application? = builder?.application
-    private val httpSetting:HttpSetting?=builder?.httpSetting
+    private val httpSetting: HttpSetting?=builder?.httpSetting
 
     /**返回全局变量*/
     fun getApplication(): Application? {
@@ -25,7 +27,7 @@ class AppSetting(builder: Builder?){
     }
 
     /**设置网络参数*/
-    fun getHttpSetting():HttpSetting?{
+    fun getHttpSetting(): HttpSetting?{
         return httpSetting
     }
 
@@ -42,7 +44,7 @@ class AppSetting(builder: Builder?){
         var application: Application? = null
         var responseErrorListener: ResponseErrorListener? = null
         var crashErrorResponse: CrashErrorListener? = null
-        var httpSetting:HttpSetting? = null
+        var httpSetting: HttpSetting? = null
 
 
         /**设置全局变量*/

@@ -1,6 +1,7 @@
 package com.example.baselibrary.confing
 
-import android.app.Application
+import com.example.baselibrary.confing.error.CrashErrorListener
+import com.example.baselibrary.http.HttpSetting
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
 interface AppConfigureDelegate {
@@ -15,12 +16,6 @@ interface AppConfigureDelegate {
     fun getErrorResponse(): ResponseErrorListener?
 
 
-    /**
-     * 获取全局的application
-     * @return
-     */
-    fun getApplication(): Application?
-
 
     /**
      * app配置
@@ -28,5 +23,5 @@ interface AppConfigureDelegate {
     fun getAppSetting(): AppSetting?
 
 
-    fun getHttpSetting():HttpSetting?
+    fun getHttpSetting(): HttpSetting?
 }

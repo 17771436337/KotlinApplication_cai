@@ -1,23 +1,27 @@
 package com.example.baselibrary.confing
 
 import android.app.Application
+import com.example.baselibrary.confing.error.CrashHandler
 import me.jessyan.rxerrorhandler.core.RxErrorHandler
 
 enum class AppConfig {
     INSTANCE;
 
     private var mAppSetting: AppSetting? = null
+     get() {return mAppSetting!!}
     private var mSugarConfigure: SugarConfigure? = null
+            get() { return mSugarConfigure}
+
+    open fun getApplication(): Application? {
+        return mAppSetting?.getApplication()
+    }
 
 
     fun initConfig(sugarConfigure: SugarConfigure) {
         this.mSugarConfigure = sugarConfigure;
         this.mAppSetting = sugarConfigure.getAppSetting()
-
         initCrashHandler();
         getRxErrorHandler();
-
-
     }
 
 
@@ -28,8 +32,8 @@ enum class AppConfig {
     open fun getRxErrorHandler(): RxErrorHandler? {
         return RxErrorHandler
             .builder()
-            .with(getAppSetting().getApplication())
-            .responseErrorListener(getAppSetting().getResponseErrorListener())
+            .with(mAppSetting?.getApplication())
+            .responseErrorListener(mAppSetting?.getResponseErrorListener())
             .build()
     }
 
@@ -40,25 +44,8 @@ enum class AppConfig {
         fun initCrashHandler(){
             var crashHandler : CrashHandler = CrashHandler.instance
             crashHandler.init(getApplication())
-            crashHandler.responseErrorListener(getAppSetting().getCrashErrorListener())
+            crashHandler.responseErrorListener(mAppSetting?.getCrashErrorListener())
 
         }
-
-
-    open fun getApplication(): Application? {
-        return getAppSetting().getApplication()
-    }
-
-    open fun getAppSetting(): AppSetting {
-        return mAppSetting!!
-    }
-
-    /**
-     * 统一的配置
-     * @return
-     */
-    open fun getSugarConfigure(): SugarConfigure? {
-        return mSugarConfigure
-    }
 
 }

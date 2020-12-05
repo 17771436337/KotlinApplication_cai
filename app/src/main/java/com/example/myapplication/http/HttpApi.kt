@@ -11,7 +11,7 @@ object HttpApi {
         var params: Map<String, String> = HashMap<String, String>().also {
             it.put("vote_id", "1496")
         }
-        HttpManager.INSTANCE.sendCmd<DataBaseBean>(HttpApi.LIST,params,null)
+        HttpManager.INSTANCE.sendCmd<DataBaseBean>(LIST,params)
     }
 
 }
