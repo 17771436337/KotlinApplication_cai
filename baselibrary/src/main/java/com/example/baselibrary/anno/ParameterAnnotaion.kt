@@ -1,12 +1,20 @@
 package com.example.baselibrary.anno
 
+
+@Target(
+    //类注解
+    AnnotationTarget.CLASS,
+    //属性变量注解
+    AnnotationTarget.FIELD,
+    //函数方法注解
+    AnnotationTarget.FUNCTION,
+    //方法参数注解
+    AnnotationTarget.VALUE_PARAMETER
+)
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RequestParam(val name: String, val value: String)
+
 class ParameterAnnotaion {
-
-
-
-
-
-
     //获取类上面的注解
     fun getClassAnnotaion(clazz:Class<*>) {
         val annotation = clazz.getAnnotation(RequestParam::class.java)

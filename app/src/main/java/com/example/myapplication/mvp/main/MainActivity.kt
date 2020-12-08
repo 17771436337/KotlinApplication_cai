@@ -1,6 +1,6 @@
 package com.example.myapplication.mvp.main
 import android.util.Log
-import com.example.baselibrary.anno.CreateHttp
+import com.example.baselibrary.anno.HttpCallBack
 import com.example.baselibrary.anno.HttpType
 import com.example.baselibrary.mvp.view.base.BaseMvpActivity
 import com.example.baselibrary.utils.GsonUtils
@@ -20,7 +20,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
     public override fun getContentView(): Int { return activity_main }
 
 
-    @CreateHttp(type = HttpType.OK,url = XINWEN)
+    @HttpCallBack(type = HttpType.OK,url = XINWEN)
     fun  onSuccess(data: String) = try {
    // showToast("代码测试成功11:${data}")
 
@@ -32,7 +32,7 @@ class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
             LogUtils.e("转换错误：${e.message}")
         }
 
-    @CreateHttp(type = HttpType.OK,url = LIST)
+    @HttpCallBack(type = HttpType.OK,url = LIST)
     fun onSuccessList(data:String){
         showToast("代码测试成功:${data}")
     }

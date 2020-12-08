@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.example.baselibrary.anno.CreateHttp
+import com.example.baselibrary.anno.HttpCallBack
 import com.example.baselibrary.network.model.HttpMseeageEvent
 import com.example.baselibrary.mvp.Constant
 import com.example.baselibrary.mvp.presenter.BasePresenter
@@ -17,8 +17,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.reflect.ParameterizedType
-
-
 
 /**基础Activity*/
  abstract class BaseMvpActivity<out Presenter : BasePresenter<BaseView<Presenter>>> : AppCompatActivity(),BaseView<Presenter> {
@@ -87,7 +85,7 @@ import java.lang.reflect.ParameterizedType
         val clazz =  cls::class.java
         val annotations = clazz.declaredMethods
         for (i in annotations) {
-            val annotation = i.getAnnotation(CreateHttp::class.java)
+            val annotation = i.getAnnotation(HttpCallBack::class.java)
             annotation?.let {
                 LogUtils.e("函数注解的值：${it.type.name},${it.url},${messageEvent.code},${messageEvent.url}")
                 if (messageEvent.code == it.type && it.url == messageEvent.url){
