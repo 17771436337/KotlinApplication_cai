@@ -1,17 +1,23 @@
 package com.example.myapplication
-
-data class DataBaseBean(
-    var data: List<Any>,
-    var descript: Descript
+data class DataBase(
+    var error_code: Int,
+    var reason: String,
+    var result: Result
 )
 
-data class Descript(
-    var end_time: String,
-    var remark: String,
-    var start_time: String,
+data class Result(
+    var `data`: List<Data>,
+    var stat: String
+)
+
+data class Data(
+    var author_name: String,
+    var category: String,
+    var date: String,
+    var thumbnail_pic_s: String,
+    var thumbnail_pic_s02: String,
+    var thumbnail_pic_s03: String,
     var title: String,
-    var vote_cut: String,
-    var vote_num: Int,
-    var vote_type: String,
-    var web_url: String
+    var uniquekey: String,
+    var url: String
 )
