@@ -11,12 +11,9 @@ import kotlinx.android.synthetic.main.activity_login.et2
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.view_title_no_right.*
 
-class RegisterActivity : BaseMvpActivity<RegisterPresenter,Any>(),RegisterView{
+class RegisterActivity : BaseMvpActivity<RegisterPresenter>(),RegisterView{
     override fun getContentView(): Int {
         return R.layout.activity_register
-    }
-    override fun onSuccess(url: String, data: Any?) {
-        TODO("Not yet implemented")
     }
     override fun init() {
         tv_title.text = "注册界面"

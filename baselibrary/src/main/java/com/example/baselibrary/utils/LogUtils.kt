@@ -29,7 +29,6 @@ class LogUtils {
         val buffer = StringBuffer()
         buffer.append("========$className : $methodName =======\r\n")
         buffer.append(log)
-        buffer.append("========$lineNumber========\r\n")
         return buffer.toString()
     }
 

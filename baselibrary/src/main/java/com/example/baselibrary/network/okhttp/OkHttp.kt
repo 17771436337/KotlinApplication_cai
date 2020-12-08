@@ -1,10 +1,10 @@
-package com.example.baselibrary.http.okhttp
+package com.example.baselibrary.network.okhttp
 
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
-import com.example.baselibrary.http.okhttp.callback.GlideCallBack
-import com.example.baselibrary.http.okhttp.request.BaseRequest
+import com.example.baselibrary.network.okhttp.callback.GlideCallBack
+import com.example.baselibrary.network.okhttp.request.BaseRequest
 import com.example.baselibrary.utils.NetworkUtil
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient

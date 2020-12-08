@@ -1,8 +1,7 @@
 package com.example.baselibrary.confing
 
 import android.app.Application
-import com.example.baselibrary.http.HttpSetting
-import okhttp3.internal.wait
+import com.example.baselibrary.network.other.HttpSetting
 
 /**
  * app统一配置模块 需要的模块自行添加即可

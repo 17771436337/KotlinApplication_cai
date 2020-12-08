@@ -2,7 +2,7 @@ package com.example.baselibrary.confing
 
 import android.app.Application
 import com.example.baselibrary.confing.error.CrashErrorListener
-import com.example.baselibrary.http.HttpSetting
+import com.example.baselibrary.network.other.HttpSetting
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener
 
 class AppSetting(builder: Builder?){

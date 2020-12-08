@@ -1,65 +1,59 @@
 package com.example.myapplication.mvp.main
-import android.content.Context
 import android.util.Log
-import android.view.View
-import android.widget.TextView
-import com.example.baselibrary.adapter.LayoutWrapper
-import com.example.baselibrary.adapter.SimpleRecyclerHolder
-import com.example.baselibrary.adapter.SingleAdapter
+import com.example.baselibrary.anno.CreateHttp
+import com.example.baselibrary.anno.HttpType
 import com.example.baselibrary.mvp.view.base.BaseMvpActivity
+import com.example.baselibrary.utils.GsonUtils
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.ThreadUtils
-import com.example.baselibrary.widget.CustomToolBar
-import com.example.baselibrary.widget.CustomToolBar.OnLeftClickListener
-import com.example.myapplication.DataBaseBean
-import com.example.myapplication.R
+import com.example.myapplication.DataBase
+import com.example.myapplication.R.layout.activity_main
 import com.example.myapplication.http.HttpApi
+import com.example.myapplication.http.LIST
+import com.example.myapplication.http.XINWEN
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
-import com.example.baselibrary.adapter.MultiAdapter as MultiAdapter
+class MainActivity : BaseMvpActivity<MainPresenter>() , MainView {
+
+    private val testTask = TestTask()
+
+    public override fun getContentView(): Int { return activity_main }
 
 
-class MainActivity : BaseMvpActivity<MainPresenter,DataBaseBean>() , MainView {
+    @CreateHttp(type = HttpType.OK,url = XINWEN)
+    fun  onSuccess(data: String) = try {
+   // showToast("代码测试成功11:${data}")
 
-    private var testTask :TestTask = TestTask()
+       val bean = GsonUtils.fromJson(data,DataBase::class.java)
 
-    public override fun getContentView(): Int { return R.layout.activity_main }
+            showToast("代码测试成功:${bean?.reason}")
+        }catch (e:Exception){
+            showToast("转换错误：${e.message}")
+            LogUtils.e("转换错误：${e.message}")
+        }
 
-
-    override fun onSuccess(url: String, data: DataBaseBean?) {
-        showToast("测试:"+url)
+    @CreateHttp(type = HttpType.OK,url = LIST)
+    fun onSuccessList(data:String){
+        showToast("代码测试成功:${data}")
     }
-
-
 
 
     override fun init() {
 
-        var layoutIds: IntArray = intArrayOf(R.layout.activity_main, R.layout.activity_main)
+        val layoutIds = intArrayOf(activity_main, activity_main)
 
-        var adapter = Test<DataBaseBean>(this,layoutIds)
+//        val adapter = Test<DataBaseBean>(this,layoutIds)
         title_view.setOnRightClickListener {
          //  v ->  showToast("开发中" + (v as TextView) .text)
 //            testTask.execute()
-            HttpApi.sendCmdList();
+            HttpApi.setXinWen()
         }
 
         test?.setOnClickListener {
-           val random = (0x1000..0xFFFE).random()
-            test.setCode(random.toString())
+//           val random = (0x1000..0xFFFE).random()
+//            test.setCode(random.toString())
+            HttpApi.sendCmdList()
         }
-    }
-
-
-    class Test<T> constructor(context:Context,layoutIds:IntArray) : MultiAdapter<T>(context,layoutIds){
-        override fun bindLayout(item: T, viewType: Int): Int {
-           return R.layout.activity_main
-        }
-
-        override fun bindData(context: Context?, holder: SimpleRecyclerHolder, item: T, layoutId: Int, position: Int) {
-
-        }
-
     }
 
 

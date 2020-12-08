@@ -1,4 +1,4 @@
-package com.example.baselibrary.http
+package com.example.baselibrary.anno
 
 enum class HttpType constructor(id:Int ,msg:String) {
     OK(1,"服务器错误"),

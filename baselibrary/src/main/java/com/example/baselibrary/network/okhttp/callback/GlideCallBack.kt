@@ -1,4 +1,4 @@
-package com.example.baselibrary.http.okhttp.callback
+package com.example.baselibrary.network.okhttp.callback
 
 import android.graphics.Bitmap
 import okhttp3.Call

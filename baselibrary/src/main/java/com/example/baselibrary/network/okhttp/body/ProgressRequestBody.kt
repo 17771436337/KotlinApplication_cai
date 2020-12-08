@@ -1,6 +1,6 @@
-package com.example.baselibrary.http.okhttp.body
+package com.example.baselibrary.network.okhttp.body
 
-import com.example.baselibrary.http.okhttp.listener.BaseProgressListener
+import com.example.baselibrary.network.okhttp.listener.BaseProgressListener
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okio.*

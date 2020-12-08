@@ -1,10 +1,17 @@
-package com.example.baselibrary.http.okhttp.callback
+package com.example.baselibrary.network.okhttp.callback
 
-import com.example.baselibrary.http.okhttp.OkHttp
+import com.example.baselibrary.network.okhttp.OkHttp
 import okhttp3.Call
 import okhttp3.Response
 
-abstract class DataCallBack <E>() : ResultCallBack() {
+abstract class StringCallBack : ResultCallBack() {
+
+    override fun uploadProgress(fileName: String, total: Long, current: Long) {
+        OkHttp.mainHandler.post {
+            uploadProgressOnMainThread(fileName, total, current)
+        }
+    }
+
     override fun start() {
 
     }
@@ -17,10 +24,10 @@ abstract class DataCallBack <E>() : ResultCallBack() {
         }
         try {
             val rawString = responseBody.string()
-            val data = stringToData(preProcessBodyString(rawString))
+
             OkHttp.mainHandler.post {
-                if (data!=null){
-                    getData(data, rawString, call, response)
+                if (rawString?.length > 0){
+                    getData( rawString, call, response)
                 }else{
                     otherException(call,response,IllegalArgumentException("stringToData() function get null"))
                 }
@@ -34,11 +41,11 @@ abstract class DataCallBack <E>() : ResultCallBack() {
 
     }
 
-    abstract fun stringToData(string:String):E
+    override fun uploadProgressOnMainThread(fileName: String, total: Long, current: Long) {}
 
-    open fun preProcessBodyString(bodyString:String):String{
-        return bodyString
-    }
+    override fun responseBodyGetNull(call: Call, response: Response) {}
+
+    abstract fun getData( rawBodyString: String, call: Call, response: Response)
 
     override fun otherException(call: Call, response: Response, e: Exception) {
         failure(call,e)
@@ -51,16 +58,4 @@ abstract class DataCallBack <E>() : ResultCallBack() {
     override fun downloadProgressOnMainThread(url:String,total: Long, current: Long) {
 
     }
-
-    override fun uploadProgress(fileName: String, total: Long, current: Long) {
-        OkHttp.mainHandler.post {
-            uploadProgressOnMainThread(fileName, total, current)
-        }
-    }
-
-    override fun uploadProgressOnMainThread(fileName: String, total: Long, current: Long) {}
-
-    override fun responseBodyGetNull(call: Call, response: Response) {}
-
-    abstract fun getData(data: E, rawBodyString: String, call: Call, response: Response)
 }

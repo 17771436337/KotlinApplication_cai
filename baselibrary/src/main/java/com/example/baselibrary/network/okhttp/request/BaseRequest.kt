@@ -1,10 +1,10 @@
-package com.example.baselibrary.http.okhttp.request
+package com.example.baselibrary.network.okhttp.request
 
-import com.example.baselibrary.http.model.DownloadBean
-import com.example.baselibrary.http.okhttp.OkHttp
-import com.example.baselibrary.http.okhttp.body.ProgressRequestBody
-import com.example.baselibrary.http.okhttp.body.ProgressResponseBody
-import com.example.baselibrary.http.okhttp.callback.ResultCallBack
+import com.example.baselibrary.network.model.DownloadBean
+import com.example.baselibrary.network.okhttp.OkHttp
+import com.example.baselibrary.network.okhttp.body.ProgressRequestBody
+import com.example.baselibrary.network.okhttp.body.ProgressResponseBody
+import com.example.baselibrary.network.okhttp.callback.ResultCallBack
 import com.example.baselibrary.utils.LogUtils
 import com.example.baselibrary.utils.NetworkUtil
 import okhttp3.*
@@ -201,6 +201,7 @@ class BaseRequest(url: String, private val type: String) {
         }
         appendParamsMapToUrl(paramsMap)
 
+        LogUtils.e(requestUrl)
         when (type) {
 
             "get" -> {

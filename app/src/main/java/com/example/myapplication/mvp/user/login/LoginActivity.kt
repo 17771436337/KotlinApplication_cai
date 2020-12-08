@@ -10,7 +10,7 @@ import com.example.myapplication.mvp.user.forgot.ForgotActivity
 import com.example.myapplication.mvp.user.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity() : BaseMvpActivity<LoginPresenter,Any>(),LoginView, Parcelable {
+class LoginActivity() : BaseMvpActivity<LoginPresenter>(),LoginView, Parcelable {
     constructor(parcel: Parcel) : this() {
     }
 
@@ -72,9 +72,6 @@ class LoginActivity() : BaseMvpActivity<LoginPresenter,Any>(),LoginView, Parcela
         }
     }
 
-    override fun onSuccess(url: String, data: Any?) {
-        TODO("Not yet implemented")
-    }
 
 
 }

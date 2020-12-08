@@ -1,26 +1,24 @@
-package com.example.baselibrary.http.okhttp.callback
+package com.example.baselibrary.network.okhttp.callback
 
-import com.example.baselibrary.http.model.BaseModel
+import com.example.baselibrary.network.model.BaseModel
 import com.google.gson.Gson
-import com.google.gson.stream.JsonReader
-import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-abstract class GsonCallBack<E : Any> : DataCallBack<E>() {
+abstract class GsonCallBack<E> : DataCallBack<E>() {
     private val gson = Gson()
     override fun stringToData(string: String): E {
         val type=(javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0]
-       return if (type is ParameterizedType) {
-             parseParameterizedType(string, type)
-        } else if (type is Class<*>) {
-            parseClass(string, type)
-        } else {
-            parseType(string, type)
-        }
-       // return gson.fromJson(string, type)
+//       return if (type is ParameterizedType) {
+//             parseParameterizedType(string, type)
+//        } else if (type is Class<*>) {
+//            parseClass(string, type)
+//        } else {
+//            parseType(string, type)
+//        }
+        return gson.fromJson(string, type)
     }
 
 

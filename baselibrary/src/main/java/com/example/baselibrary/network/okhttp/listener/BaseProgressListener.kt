@@ -1,4 +1,4 @@
-package com.example.baselibrary.http.okhttp.listener
+package com.example.baselibrary.network.okhttp.listener
 
 /**进度条回调接口*/
 interface BaseProgressListener {
